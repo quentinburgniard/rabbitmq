@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 
 public class App {
   private final static String QUEUE_NAME = "url";
+  private static final String EXCHANGE_NAME = "db";
 
   public static void main(String[] args) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("localhost");
+    factory.setHost("0.0.0.0");
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
@@ -26,6 +27,13 @@ public class App {
         String url = new String(body, "UTF-8");
         Optional<String> mainImage = MainImageResolver.resolveMainImage(url);
         System.out.println(mainImage);
+
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+
+        channel.basicPublish(EXCHANGE_NAME, "db.save.img", null, mainImage);
+        System.out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
+
+        connection.close();
       }
     };
     channel.basicConsume(QUEUE_NAME, true, consumer);
