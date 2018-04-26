@@ -5,7 +5,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
     var q = 'url';
 
     ch.assertQueue(q, {durable: false});
-    ch.sendToQueue(q, new Buffer('https://medium.com/personal-growth/a-quick-beginners-guide-to-drawing-58213877715e'));
+    ch.sendToQueue(q, new Buffer('https://medium.com/netflix-techblog/titus-the-netflix-container-management-platform-is-now-open-source-f868c9fb5436'));
   });
   setTimeout(function() { conn.close(); process.exit(0) }, 500);
 });
