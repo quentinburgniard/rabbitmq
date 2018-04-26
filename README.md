@@ -15,9 +15,9 @@ Launch the first RabbitMQ node
 Launch the second RabbitMQ node
 
 	docker run \
-	-d \
-	-v ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config \
-	--add-host rabbit-1: \
-	--hostname my-rabbit-2 \
-	--name my-rabbit-2 \
-	-e RABBITMQ_ERLANG_COOKIE='ex8$i}9\dLYK/&&T94F7u42a.DW>y5Jd' rabbitmq:management
+		-d \
+		-v ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config \
+		--add-host rabbit-1: \
+		--hostname my-rabbit-2 \
+		--name my-rabbit-2 \
+		-e RABBITMQ_ERLANG_COOKIE='ex8$i}9\dLYK/&&T94F7u42a.DW>y5Jd' rabbitmq:management
