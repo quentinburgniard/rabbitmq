@@ -26,12 +26,10 @@ public class App {
         System.out.println(" [x] Received '" + message + "'");
         String url = new String(body, "UTF-8");
         Optional<String> mainImage = MainImageResolver.resolveMainImage(url);
-        System.out.println(mainImage);
 
         channel.exchangeDeclare(EXCHANGE_NAME, "topic");
 
-        channel.basicPublish(EXCHANGE_NAME, "db.save.img", null, mainImage);
-        System.out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
+        channel.basicPublish(EXCHANGE_NAME, "db.save.img", null, mainImage.getBytes());
 
         connection.close();
       }
