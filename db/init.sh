@@ -1,7 +1,7 @@
 #!/bin/sh
 docker run \
   -d \
-  --name mariadb \
+  --name mariadb-1 \
   -e MYSQL_ROOT_PASSWORD=root \
   -e MYSQL_DATABASE=rabbitmq \
   -e MYSQL_USER=guest \

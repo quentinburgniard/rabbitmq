@@ -11,7 +11,7 @@ public class App {
 
   public static void main(String[] args) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("0.0.0.0");
+    factory.setHost("rabbit-1");
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
@@ -27,9 +27,11 @@ public class App {
         String url = new String(body, "UTF-8");
         Optional<String> mainImage = MainImageResolver.resolveMainImage(url);
 
-        channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
 
-        channel.basicPublish(EXCHANGE_NAME, "db.save.img", null, mainImage.getBytes());
+        if (mainImage.isPresent()) {
+          channel.basicPublish(EXCHANGE_NAME, "db.save.img", null, mainImage.get().getBytes());
+        }
 
         connection.close();
       }
