@@ -1,8 +1,8 @@
-# Discovery of RabbitMQ
+# Découverte RabbitMQ
 
 ## Installation
 
-Launch the first RabbitMQ node
+Lancer le premier noeud rabbitmq
 
 docker run \
 -d \
@@ -14,7 +14,7 @@ docker run \
 -e RABBITMQ_ERLANG_COOKIE='ex8$i}9\dLYK/&&T94F7u42a.DW>y5Jd' \
 rabbitmq:management
 
-Launch the second RabbitMQ node
+Lancer le second noeud rabbitmq
 
 docker run \
 -d \
@@ -23,6 +23,8 @@ docker run \
 --add-host rabbit-1:172.17.0.2 \
 -e RABBITMQ_ERLANG_COOKIE='ex8$i}9\dLYK/&&T94F7u42a.DW>y5Jd' \
 rabbitmq:management
+
+Démarrer la base de donnée
 
 docker run \
 -d \
@@ -34,6 +36,8 @@ docker run \
 -p 3306:3306 \
 mariadb
 
+Lancer phpmyadmin pour contrôler l'enregistrement des valeurs
+
 docker run \
 -d \
 --name phpmyadmin-1 \
@@ -41,8 +45,11 @@ docker run \
 -p 8080:80 \
 phpmyadmin/phpmyadmin
 
+Lancer P3
 
-Launch the Java img-resolver
+node readability/readability.js
+
+Lancer un docker gradle pour résoudre l'images principale de l'article P3
 
 docker run \
 -d \
@@ -53,13 +60,6 @@ docker run \
 -w /home/gradle/project \
 gradle gradle run
 
+Lancer P4
 
-docker run \
-  -d \
-  --name mariadb-1 \
-  -e MYSQL_ROOT_PASSWORD=root \
-  -e MYSQL_DATABASE=rabbitmq \
-  -e MYSQL_USER=guest \
-  -e MYSQL_PASSWORD=guest \
-  -p 3306:3306 \
-  mariadb
+node db/db.js

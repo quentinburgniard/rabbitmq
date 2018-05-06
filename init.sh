@@ -1,4 +1,5 @@
 #!/bin/sh
+# lancer rabbit-1
 docker run \
 -d \
 --name rabbit-1 \
@@ -9,6 +10,7 @@ docker run \
 -e RABBITMQ_ERLANG_COOKIE='ex8$i}9\dLYK/&&T94F7u42a.DW>y5Jd' \
 rabbitmq:management
 
+# lancer rabbit-2
 docker run \
 -d \
 --name rabbit-2 \
