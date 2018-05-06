@@ -8,3 +8,9 @@ docker run \
   -e MYSQL_PASSWORD=guest \
   -p 3306:3306 \
   mariadb
+
+  docker run \
+    -d \
+    --name mariadb-1 \
+    -p 3306:3306 \
+    quentinburgniard/mariadb-galera-server
