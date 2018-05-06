@@ -2,7 +2,7 @@
 
 ## Installation
 
-Lancer le premier noeud rabbitmq
+Lancer le premier noeud RabbitMQ
 
 ```
 docker run \
@@ -16,7 +16,7 @@ docker run \
 rabbitmq:management
 ```
 
-Lancer le second noeud rabbitmq
+Lancer le second noeud RabbitMQ
 
 ```
 docker run \
@@ -42,7 +42,7 @@ docker run \
 mariadb
 ```
 
-Lancer phpmyadmin pour contrôler l'enregistrement des valeurs
+Lancer PhpMyAdmin pour contrôler l'enregistrement
 
 ```
 docker run \
@@ -59,7 +59,7 @@ Lancer P3
 node readability/readability.js
 ```
 
-Lancer un docker gradle pour résoudre l'images principale de l'article P3
+Lancer un docker Gradle pour résoudre l'image principale de l'url
 
 ```
 docker run \
@@ -77,3 +77,14 @@ Lancer P4
 ```
 node db/db.js
 ```
+
+## Docker
+
+Noeuds Docker : simplement lancer la commande.
+Il faut les lancer dans l'ordre car les noeuds communiquent avec les adresses IP que Docker assigne à chaque conteneur (Docker Compose serait sûrement une solution plus élégante).
+
+## Node
+
+Noeuds Node : installer les dépendances avant de lancer les noeuds.
+
+`npm install`

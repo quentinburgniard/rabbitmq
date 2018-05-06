@@ -17,6 +17,8 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
       ch.bindQueue(queue.queue, exchange, 'db.save.*');
 
       ch.consume(queue.queue, function(msg) {
+
+        // [module mysql] connection à la base de donnée
         var connection = new mariadb.createConnection({
           host: '172.17.0.4',
           user: 'root',
@@ -24,6 +26,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
           db: 'rabbitmq'
         });
 
+        // [module mysql] gestion des erreurs
         connection.connect(function(err) {
           if (err) {
             console.error('error connecting: ' + err.stack);
@@ -42,7 +45,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
             if (error) throw error;
           });
 
-
+          // selon la clef de routage, sauvegarder dans tellle ou telle table 
           if (msg.fields.routingKey == "db.save.img") {
             connection.query("INSERT INTO pictures (url) VALUES (\"" + toSingleQuotes(msg.content.toString()) + "\")", function(err, result) {
               console.dir(err);

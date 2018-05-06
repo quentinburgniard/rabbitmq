@@ -6,7 +6,6 @@
   "dependencies": {
     "amqplib": "^0.5.2",
     "escape-html": "^1.0.3",
-    "mariasql": "^0.2.6",
     "mysql": "^2.15.0",
     "to-single-quotes": "^3.0.0"
   }

@@ -1,7 +1,7 @@
 {
   "name": "rabbitmq",
   "version": "1.0.0",
-  "description": "https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html",
+  "description": "Source: https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {

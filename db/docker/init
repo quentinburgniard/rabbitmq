@@ -1,4 +1,0 @@
-CREATE DATABASE IF NOT EXISTS rabbitmq;
-CREATE USER IF NOT EXISTS 'guest'@'localhost' IDENTIFIED BY 'guest';
-GRANT ALL PRIVILEGES ON rabbitmq.* TO 'guest'@'localhost';
-FLUSH PRIVILEGES;
