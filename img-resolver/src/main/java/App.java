@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class App {
-  private final static String QUEUE_NAME = "url";
   private static final String EXCHANGE_NAME = "db";
 
   public static void main(String[] args) throws Exception {
@@ -15,8 +14,10 @@ public class App {
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
-    channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-    System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+    channel.exchangeDeclare("url", "fanout", true);
+    String queueName = channel.queueDeclare().getQueue();
+    channel.queueBind(queueName, "url", "");
+
 
     Consumer consumer = new DefaultConsumer(channel) {
       @Override
@@ -36,6 +37,6 @@ public class App {
         connection.close();
       }
     };
-    channel.basicConsume(QUEUE_NAME, true, consumer);
+    channel.basicConsume(queueName, true, consumer);
   }
 }

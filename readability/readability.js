@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var amqp = require('amqplib/callback_api');
 // module qui extrait le contenu textuel de l'article
 var read = require('node-readability');
@@ -5,30 +7,33 @@ var read = require('node-readability');
 // connection cluster RabbitMQ
 amqp.connect('amqp://0.0.0.0', function(err, conn) {
   conn.createChannel(function(err, ch) {
-    var q = 'url';
+    var ex = 'url';
 
     // créer la file d'attente si elle n'existe pas
-    ch.assertQueue(q, {durable: true});
+    ch.assertExchange(ex, 'fanout', {durable: true});
 
     // écouter la file d'attente
-    ch.consume(q, function(msg) {
+    ch.assertQueue('', {exclusive: true}, function(err, q) {
 
-      // extraite le contenu de la page HTML
-      read(msg.content.toString(), function(error, article, meta) {
+      ch.bindQueue(q.queue, ex, '');
 
-        var ex = 'db';
+      ch.consume(q.queue, function(msg) {
+        // extraite le contenu de la page HTML
+        read(msg.content.toString(), function(error, article, meta) {
 
-        // échangeur P4 qui communique avec la base de donnée
-        ch.assertExchange(ex, 'topic');
+          var ex2 = 'db';
 
-        // envoyer à l'échangeur avec une clef spécifique
-        ch.publish(ex, 'db.save.txt', new Buffer(article.content));
-        console.log(" [x] Sent %s:'%s'", 'db.save.txt');
+          // échangeur P4 qui communique avec la base de donnée
+          ch.assertExchange(ex2, 'topic');
 
-        // module readability : vider le cache
-        article.close();
+          // envoyer à l'échangeur avec une clef spécifique
+          ch.publish(ex2, 'db.save.txt', new Buffer(article.content));
+          console.log(" [x] Sent %s:'%s'", 'db.save.txt');
+
+          // module readability : vider le cache
+          article.close();
+        }, {noAck: true});
       });
-
     });
   });
-}, {noAck: true});
+});

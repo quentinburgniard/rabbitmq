@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var amqp = require('amqplib/callback_api');
 var mariadb = require('mysql');
 var escape = require('escape-html');
@@ -45,7 +47,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
             if (error) throw error;
           });
 
-          // selon la clef de routage, sauvegarder dans tellle ou telle table 
+          // selon la clef de routage, sauvegarder dans tellle ou telle table
           if (msg.fields.routingKey == "db.save.img") {
             connection.query("INSERT INTO pictures (url) VALUES (\"" + toSingleQuotes(msg.content.toString()) + "\")", function(err, result) {
               console.dir(err);
