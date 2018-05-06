@@ -53,13 +53,13 @@ docker run \
 phpmyadmin/phpmyadmin
 ```
 
-Lancer P3
+Lancer P2
 
 ```
 node readability/readability.js
 ```
 
-Lancer un docker Gradle pour résoudre l'image principale de l'url
+Lancer P3 : un docker Gradle qui renvoit l'image principale de la page
 
 ```
 docker run \
@@ -76,6 +76,12 @@ Lancer P4
 
 ```
 node db/db.js
+```
+
+Lancer P1 pour envoyer l'adresse aux autres noeuds
+
+```
+node send/send.js
 ```
 
 ## Docker
