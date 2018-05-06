@@ -10,7 +10,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
     var ex = 'url';
 
     // créer la file d'attente si elle n'existe pas
-    ch.assertExchange(ex, 'fanout', {durable: true});
+    ch.assertExchange(ex, 'fanout', {durable: false});
 
     // écouter la file d'attente
     ch.assertQueue('', {exclusive: true}, function(err, q) {

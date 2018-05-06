@@ -14,7 +14,7 @@ public class App {
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
-    channel.exchangeDeclare("url", "fanout", true);
+    channel.exchangeDeclare("url", "fanout", false);
     String queueName = channel.queueDeclare().getQueue();
     channel.queueBind(queueName, "url", "");
 
