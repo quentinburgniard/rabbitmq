@@ -81,7 +81,11 @@ node db/db.js
 Lancer P1 pour envoyer l'adresse aux autres noeuds
 
 ```
+<<<<<<< HEAD
 node send/send.js
+=======
+node db/db.js
+>>>>>>> 86d051bd566c6e779715bc73bf363330783a1dc0
 ```
 
 ## Docker
