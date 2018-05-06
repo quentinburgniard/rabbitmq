@@ -8,7 +8,7 @@ amqp.connect('amqp://0.0.0.0', function(err, conn) {
     var q = 'url';
 
     // créer la file d'attente si elle n'existe pas
-    ch.assertQueue(q, {durable: false});
+    ch.assertQueue(q, {durable: true});
 
     // écouter la file d'attente
     ch.consume(q, function(msg) {
